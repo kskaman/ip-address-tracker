@@ -1,25 +1,27 @@
+import DisplayMap from "./components/DisplayMap";
 import SearchBar from "./components/SearchBar";
 
-const App = () => {
+function App() {
   return (
-    <div className="h-screen font-rubik">
+    <div className="flex flex-col h-screen font-rubik">
+      {/* Top Section */}
       <div
-        className="flex flex-col
-         items-center gap-[30px]
-        h-[30.43%] w-full pt-6 sm:pt-8
-      bg-mobile sm:bg-desktop bg-cover z-1"
+        className="
+          flex flex-col items-center gap-8
+          h-[30%] w-full pt-6 sm:pt-8
+          bg-mobile sm:bg-desktop bg-cover
+        "
       >
-        <h1
-          className="text-[32px] text-[#ffffff]
-          -tracking-[0.29px] font-medium h-[30px]"
-        >
-          IP Address Tracker
-        </h1>
+        <h1 className="text-2xl text-white font-medium">IP Address Tracker</h1>
         <SearchBar />
       </div>
-      <div className="h-[69.37%] w-full z-1">div 2</div>
+
+      {/* Map Section */}
+      <div className="h-[70%] w-full">
+        <DisplayMap />
+      </div>
     </div>
   );
-};
+}
 
 export default App;
