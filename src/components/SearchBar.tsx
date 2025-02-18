@@ -17,7 +17,8 @@ const SearchBar = ({ userInput, setUserInput, onSearch }: SearchBarProps) => {
   return (
     <div className="relative w-[min(87.2%,555px)]">
       <input
-        className="h-[58px] w-[100%] rounded-[15px] pr-[74px] pl-4"
+        className="h-[58px] w-[100%] rounded-[15px]
+         pr-[74px] pl-4 outline-none focus:outline-none"
         placeholder="Search for any IP address or domain"
         value={userInput}
         onChange={(e) => setUserInput(e.target.value)}

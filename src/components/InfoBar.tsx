@@ -15,7 +15,7 @@ const InfoBar = ({ data }: { data: IpInfo | null }) => {
           w-[min(87.2%, 1110px)] 
          flex flex-col sm:flex-row 
          gap-4 sm:justify-evenly 
-         items-center
+         items-start
          "
     >
       <div>
