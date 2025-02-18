@@ -1,46 +1,41 @@
+import { useState, useEffect } from "react";
 import { LatLngExpression } from "leaflet";
 import { MapContainer, Marker, TileLayer, ZoomControl } from "react-leaflet";
 
-// -----------------------------------------------
-// either we can use below function and call
-// this function within MapContainer or use
-// key parameter in MapContainer as done to
-// update the map center whenever position changes
-// -----------------------------------------------
-// function DisplayMap({ position }: DisplayMapProps) {
-//   // Child component that updates center when position changes
-//   function UpdateMapCenter({ center }: { center: LatLngExpression }) {
-//     const map = useMap();
+interface DisplayMapProps {
+  position: LatLngExpression;
+}
 
-//     useEffect(() => {
-//       map.setView(center);
-//     }, [map, center]);
+const DisplayMap = ({ position }: DisplayMapProps) => {
+  const [zoom, setZoom] = useState(14);
 
-//     return null; // No actual rendering
-//   }
+  useEffect(() => {
+    const updateZoom = () => {
+      const width = window.innerWidth;
+      if (width < 640) setZoom(12);
+      else if (width < 1024) setZoom(13);
+      else setZoom(14);
+    };
+    updateZoom();
+    window.addEventListener("resize", updateZoom);
+    return () => window.removeEventListener("resize", updateZoom);
+  }, []);
 
-const DisplayMap = ({ position }: { position: LatLngExpression }) => {
   return (
-    <div style={{ height: "70vh", width: "100%" }}>
+    <div style={{ height: "100%", width: "100%" }}>
       <MapContainer
         key={JSON.stringify(position)}
         center={position}
-        zoom={14}
+        zoom={zoom}
         scrollWheelZoom={true}
         style={{ height: "100%", width: "100%" }}
         zoomControl={false}
       >
         <TileLayer
-          attribution='&copy; <a href="https://openstreetmap.org/copyright">
-            OpenStreetMap
-          </a> contributors'
+          attribution='&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-        {/* This calls map.setView each time `position` changes
-        <UpdateMapCenter center={position} /> */}
         <ZoomControl position="bottomleft" />
-
         <Marker position={position} />
       </MapContainer>
     </div>
