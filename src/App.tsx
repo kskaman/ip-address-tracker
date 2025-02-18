@@ -54,6 +54,8 @@ function App() {
     );
   }
 
+  console.log("ipData : ", ipData);
+
   return (
     <>
       <div

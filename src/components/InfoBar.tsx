@@ -1,5 +1,12 @@
 import { IpInfo } from "../types/ipInfo";
 
+const formatTimeZone = (zone: string): string => {
+  return zone
+    .split("/")
+    .map((part) => part.replace(/_/g, " "))
+    .join(", ");
+};
+
 const Divider = () => (
   <>
     <div className="hidden md:block w-[1px] h-[45px] bg-gray-200" />
@@ -30,7 +37,7 @@ const InfoBar = ({ data }: { data: IpInfo | null }) => {
         <h3 className="text-[10px] md:text-[12px] uppercase text-gray-500">
           Timezone
         </h3>
-        <p className="text-md">{timezone}</p>
+        <p className="text-md">{formatTimeZone(timezone)}</p>
       </div>
       <Divider />
       <div>
